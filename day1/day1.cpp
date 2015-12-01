@@ -8,6 +8,8 @@ int main(int argc, char** argv)
     return 1;
   }
 
+  bool enteredBasement = false;
+  int position = 1;
   int floor = 0;
   std::ifstream is(argv[1]);
 
@@ -17,9 +19,15 @@ int main(int argc, char** argv)
       floor++;
     else if (c == ')')
       floor--;
+
+    if (!enteredBasement && floor < 0) {
+      std::cout << "Entered basement at: " << position << std::endl;
+      enteredBasement = true;
+    }
+    position++;
   }
 
   is.close();
-  std::cout << "Answer: " << floor << std::endl;
+  std::cout << "Final floor: " << floor << std::endl;
   return 0;
 }
